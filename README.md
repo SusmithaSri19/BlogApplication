@@ -1,4 +1,4 @@
-# 📝 Spring Boot Blog Application
+# Spring Boot Blog Application
 
 A full-stack Blog Management Application built using **Spring Boot** and **Thymeleaf**.
 This app allows users to register, log in, create, view, update, and delete blog posts.
@@ -8,13 +8,13 @@ Only the blog author can update or delete their blogs. Public users can view all
 
 ## Features
 
-- ✅ User Authentication (Register / Login / Logout)
-- ✅ Create Blog Posts (only when logged in)
-- ✅ View All Blog Posts (publicly accessible)
-- ✅ Edit & Delete Blog Posts (only by the author)
-- ✅ Form Validations for required fields (title, content)
-- ✅ Full CRUD Operations
-- ✅ SQL Database Integration (MySQL/H2)
+- User Authentication (Register / Login / Logout)
+- Create Blog Posts (only when logged in)
+- View All Blog Posts (publicly accessible)
+- Edit & Delete Blog Posts (only by the author)
+- Form Validations for required fields (title, content)
+- Full CRUD Operations
+- SQL Database Integration (MySQL/H2)
 
 ---
 
