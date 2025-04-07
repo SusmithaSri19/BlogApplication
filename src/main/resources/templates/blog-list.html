@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Blog List</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" th:href="@{/blog-list.css}" />
+</head>
+<body>
+<div class="container mt-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1>All Blogs</h1>
+        <a th:href="@{/blogs/new}" class="btn btn-success">Create New Blog</a>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6 mb-4" th:each="blog : ${blogs}">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body">
+                    <h4 class="card-title" th:text="${blog.title}">Blog Title</h4>
+                    <p class="card-text" th:text="${#strings.abbreviate(blog.content, 150)}">Blog content snippet...</p>
+                    <p class="card-subtitle text-muted mb-2">
+                        by <span th:text="${blog.author != null ? blog.author.email : 'Anonymous'}">author@example.com</span>
+                    </p>
+
+                    <a class="btn btn-sm btn-primary me-2" th:href="@{'/blogs/' + ${blog.id}}">Read More</a>
+
+                    <!-- Show Edit/Delete only if the user is the author -->
+                    <div class="mt-2" th:if="${#authentication.name == blog.author?.email}">
+                        <a th:href="@{'/blogs/edit/' + ${blog.id}}" class="btn btn-sm btn-outline-primary me-2">Edit</a>
+                        <form th:action="@{'/blogs/delete/' + ${blog.id}}" method="post" style="display:inline;">
+                            <button type="submit" class="btn btn-sm btn-outline-danger"
+                                    onclick="return confirm('Are you sure you want to delete this blog?');">
+                                Delete
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div th:if="${#lists.isEmpty(blogs)}">
+        <p class="text-muted">No blogs found.</p>
+    </div>
+
+    <!-- Pagination -->
+    <div class="mt-4" th:if="${blogPage != null and blogPage.totalPages > 1}">
+        <nav>
+            <ul class="pagination justify-content-center">
+                <li class="page-item" th:classappend="${!blogPage.hasPrevious()} ? 'disabled'">
+                    <a class="page-link" th:href="@{/blogs(page=${currentPage - 1}, size=${blogPage.size})}">Previous</a>
+                </li>
+
+                <li class="page-item" th:each="i : ${#numbers.sequence(0, blogPage.totalPages - 1)}"
+                    th:classappend="${i} == ${currentPage} ? 'active'">
+                    <a class="page-link"
+                       th:href="@{/blogs(page=${i}, size=${blogPage.size})}"
+                       th:text="${i + 1}">1</a>
+                </li>
+
+                <li class="page-item" th:classappend="${!blogPage.hasNext()} ? 'disabled'">
+                    <a class="page-link" th:href="@{/blogs(page=${currentPage + 1}, size=${blogPage.size})}">Next</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</div>
+</body>
+</html>

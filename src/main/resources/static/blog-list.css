@@ -1,0 +1,122 @@
+@charset "UTF-8";
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 20px;
+}
+
+h1 {
+    text-align: center;
+    color: #4666ff;
+    margin-bottom: 30px;
+}
+
+.create-button {
+    display: block;
+    margin: 0 auto 20px auto;
+    padding: 10px 20px;
+    background-color: #4666ff;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.create-button:hover {
+    background-color: #374dcf;
+}
+
+.blog-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 24px;
+}
+
+.blog-card {
+    background-color: #ffffff;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    width: 320px;
+    transition: transform 0.2s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.blog-card:hover {
+    transform: translateY(-5px);
+}
+
+.blog-card h2 {
+    margin-top: 0;
+    font-size: 24px;
+    color: #4666ff;
+}
+
+.blog-card .content {
+    color: #333;
+    margin: 12px 0;
+    text-align: left;
+}
+
+.blog-card .author {
+    font-style: italic;
+    color: #6c757d; /* Changed from 'ash' to valid muted gray */
+    font-size: 14px;
+    margin-top: auto;
+}
+
+/* Optional: Buttons for edit/delete */
+.blog-card .btn {
+    margin-top: 10px;
+    padding: 6px 12px;
+    font-size: 14px;
+    border-radius: 4px;
+    text-decoration: none;
+}
+
+.blog-card .btn-outline-primary {
+    border: 1px solid #4666ff;
+    color: #4666ff;
+}
+
+.blog-card .btn-outline-primary:hover {
+    background-color: #4666ff;
+    color: #fff;
+}
+
+.blog-card .btn-outline-danger {
+    border: 1px solid #dc3545;
+    color: #dc3545;
+}
+
+.blog-card .btn-outline-danger:hover {
+    background-color: #dc3545;
+    color: #fff;
+}
+.pagination ul {
+    display: flex;
+    list-style-type: none;
+    gap: 10px;
+    justify-content: center;
+    padding: 0;
+}
+
+.pagination a {
+    padding: 8px 12px;
+    background-color: #f0f0f0;
+    border-radius: 5px;
+    text-decoration: none;
+    color: #333;
+}
+
+.pagination a.active {
+    background-color: #007bff;
+    color: white;
+}
+

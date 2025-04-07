@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="${blog.id == null ? 'Create Blog' : 'Edit Blog'}">Blog Form</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" th:href="@{/blog-form.css}" />
+</head>
+<body>
+    <div class="container mt-5">
+        <h2 class="text-center mb-4" th:text="${blog.id == null ? 'Create a New Blog' : 'Edit Blog'}">Blog Form</h2>
+
+        <form th:action="@{/blogs}" th:object="${blog}" method="post" class="needs-validation" novalidate>
+            <input type="hidden" th:field="*{id}" />
+
+            <div class="mb-3">
+                <label for="title" class="form-label">Title</label>
+                <input type="text" th:field="*{title}" class="form-control" id="title" placeholder="Enter blog title" required />
+                <div class="text-danger" th:if="${#fields.hasErrors('title')}" th:errors="*{title}">Title Error</div>
+            </div>
+
+            <div class="mb-3">
+                <label for="content" class="form-label">Content</label>
+                <textarea th:field="*{content}" class="form-control" id="content" rows="6" placeholder="Write your blog content here..." required></textarea>
+                <div class="text-danger" th:if="${#fields.hasErrors('content')}" th:errors="*{content}">Content Error</div>
+            </div>
+
+            <div class="d-flex justify-content-between">
+                <a class="btn btn-secondary" th:href="@{/blogs}">Cancel</a>
+                <button type="submit" class="btn btn-primary" th:text="${blog.id == null ? 'Post Blog' : 'Update Blog'}"></button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        // Bootstrap form validation
+        (() => {
+            'use strict';
+            const forms = document.querySelectorAll('.needs-validation');
+            Array.from(forms).forEach(form => {
+                form.addEventListener('submit', event => {
+                    if (!form.checkValidity()) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        })();
+    </script>
+</body>
+</html>
